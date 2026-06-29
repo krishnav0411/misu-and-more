@@ -1,20 +1,20 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
+
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { MobileNav } from "./mobile-nav"
-
-const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#shop", label: "Shop" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
-]
+import { navItems, isRouteActive } from "./navigation"
+import { useHomeSectionNav } from "./section-scroll"
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = React.useState(false)
+  const pathname = usePathname()
+  const goToSection = useHomeSectionNav()
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -35,30 +35,49 @@ export function Navbar() {
       transition={{ duration: 0.3 }}
     >
       <nav className="container flex items-center justify-between h-16">
-        <a
-          href="#home"
+        <Link
+          href="/"
           className="font-serif text-xl font-medium tracking-tight"
         >
           misu&more.
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navItems.map((item) =>
+            item.kind === "route" ? (
+              <Link
+                key={item.label}
+                href={item.href}
+                aria-current={
+                  isRouteActive(item.href, pathname) ? "page" : undefined
+                }
+                className={cn(
+                  "text-sm font-medium transition-colors",
+                  isRouteActive(item.href, pathname)
+                    ? "text-foreground"
+                    : "text-foreground/70 hover:text-foreground"
+                )}
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <button
+                key={item.label}
+                type="button"
+                onClick={() => goToSection(item.sectionId)}
+                className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
+              >
+                {item.label}
+              </button>
+            )
+          )}
         </div>
 
         <div className="flex items-center gap-4">
           <Button asChild size="sm" className="hidden md:inline-flex">
-            <a href="#shop">Order Now</a>
+            <Link href="/shop">Order Now</Link>
           </Button>
-          <MobileNav links={navLinks} />
+          <MobileNav />
         </div>
       </nav>
     </motion.header>
