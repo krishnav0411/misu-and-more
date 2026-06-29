@@ -1,5 +1,33 @@
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
+# Project Context
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
+Project Name
+
+Misu & More
+
+Type
+
+Premium made-to-order dessert ordering platform.
+
+Target
+
+High-end boutique dessert brand.
+
+Primary Goals
+
+* Beautiful marketing website.
+* Premium shopping experience.
+* Simple admin dashboard.
+* Future Supabase backend.
+* Future Razorpay integration.
+
+Business Rules
+
+* Made-to-order products.
+* Online payment only.
+* Preparation time per product.
+* No inventory tracking.
+* No cash on delivery.
+
+Current Sprint
+
+Foundation.
