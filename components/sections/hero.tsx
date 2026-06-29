@@ -18,7 +18,10 @@ const fadeUp: Variants = {
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden pt-28 pb-20 lg:pt-16">
+    <section
+      id="home"
+      className="relative flex min-h-screen items-center overflow-hidden pt-28 pb-20 lg:pt-16"
+    >
       <div className="container">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left — editorial copy */}
@@ -61,15 +64,16 @@ export function Hero() {
               variants={fadeUp}
               className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
-              <Button size="lg" className="h-12 px-7 text-base">
-                Order Now
+              <Button asChild size="lg" className="h-12 px-7 text-base">
+                <a href="#shop">Browse Desserts</a>
               </Button>
               <Button
+                asChild
                 variant="outline"
                 size="lg"
                 className="h-12 px-7 text-base"
               >
-                View Collection
+                <a href="#shop">View Collection</a>
               </Button>
             </motion.div>
 
