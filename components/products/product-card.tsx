@@ -1,18 +1,29 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { motion, type Variants } from "framer-motion"
 import { toast } from "sonner"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import { ProductImagePlaceholder } from "./product-image-placeholder"
 
 export type Product = {
   name: string
   description: string
   price: string
-  image: string
+  image?: string
+  slug?: string
+}
+
+type ProductCardProps = {
+  product: Product
+  /** When set, the CTA becomes a link to this route instead of a toast. */
+  href?: string
+  ctaLabel?: string
+  ctaVariant?: "default" | "outline"
 }
 
 const cardVariants: Variants = {
@@ -24,20 +35,29 @@ const cardVariants: Variants = {
   },
 }
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({
+  product,
+  href,
+  ctaLabel = "View Details",
+  ctaVariant = "outline",
+}: ProductCardProps) {
   const { name, description, price, image } = product
 
   return (
     <motion.div variants={cardVariants}>
       <Card className="group/card h-full gap-0 overflow-hidden rounded-2xl py-0 shadow-sm shadow-foreground/5 ring-1 ring-foreground/5 transition-shadow duration-300 hover:shadow-lg hover:shadow-foreground/10">
         <div className="relative aspect-[4/5] overflow-hidden bg-muted">
-          <Image
-            src={image}
-            alt={`${name} by Misu & More`}
-            fill
-            sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
-            className="object-cover transition-transform duration-500 ease-out group-hover/card:scale-105"
-          />
+          {image ? (
+            <Image
+              src={image}
+              alt={`${name} by Misu & More`}
+              fill
+              sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
+              className="object-cover transition-transform duration-500 ease-out group-hover/card:scale-105"
+            />
+          ) : (
+            <ProductImagePlaceholder />
+          )}
           <Badge className="absolute left-3 top-3 bg-background/85 text-foreground backdrop-blur-sm">
             Made to Order
           </Badge>
@@ -56,15 +76,23 @@ export function ProductCard({ product }: { product: Product }) {
               From{" "}
               <span className="font-medium text-foreground">{price}</span>
             </p>
-            <Button
-              variant="outline"
-              className="w-full"
-              onClick={() =>
-                toast("Detailed product pages will be available in the final website.")
-              }
-            >
-              View Details
-            </Button>
+            {href ? (
+              <Button asChild variant={ctaVariant} className="w-full">
+                <Link href={href}>{ctaLabel}</Link>
+              </Button>
+            ) : (
+              <Button
+                variant={ctaVariant}
+                className="w-full"
+                onClick={() =>
+                  toast(
+                    "Detailed product pages will be available in the final website."
+                  )
+                }
+              >
+                {ctaLabel}
+              </Button>
+            )}
           </div>
         </div>
       </Card>
