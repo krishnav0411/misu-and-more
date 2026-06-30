@@ -29,8 +29,6 @@ export function ProductGrid({
           key={product.slug}
           product={product}
           href={`/product/${product.slug}`}
-          ctaLabel="View Product"
-          ctaVariant="default"
         />
       ))}
     </motion.div>

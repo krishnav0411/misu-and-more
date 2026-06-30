@@ -39,7 +39,7 @@ export default async function ShopPage() {
   const products = await getProducts()
 
   return (
-    <div className="pt-32 pb-24 sm:pt-40 sm:pb-32">
+  <div className="pt-20 pb-24 sm:pt-20 sm:pb-32">
       <div className="container">
         <header className="max-w-2xl">
           <h1 className="font-serif text-5xl font-medium tracking-tight text-foreground sm:text-6xl">

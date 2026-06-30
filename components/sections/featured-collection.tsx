@@ -27,7 +27,7 @@ const gridVariants: Variants = {
 
 export function FeaturedCollection() {
   return (
-    <section id={SECTION_IDS.featured} className="scroll-mt-16 py-24 sm:py-32">
+    <section id={SECTION_IDS.featured} className="scroll-mt-16 pt-16 pb-24 sm:pb-32">
       <div className="container">
         <motion.div
           initial="hidden"
@@ -56,7 +56,6 @@ export function FeaturedCollection() {
               key={product.slug}
               product={product}
               href={`/product/${product.slug}`}
-              ctaLabel="View Product"
             />
           ))}
         </motion.div>
