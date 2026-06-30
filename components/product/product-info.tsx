@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Clock } from "lucide-react"
+import { toast } from "sonner"
 
 import type { CatalogProduct } from "@/lib/products"
 import { Badge } from "@/components/ui/badge"
@@ -34,7 +35,7 @@ function Field({
 }
 
 export function ProductInfo({ product }: { product: CatalogProduct }) {
-  const { name, slug, price, description, flavors, sizes, prepTime } = product
+  const { name, price, description, flavors, sizes, prepTime } = product
 
   return (
     <motion.div
@@ -105,8 +106,14 @@ export function ProductInfo({ product }: { product: CatalogProduct }) {
       </div>
 
       <div className="mt-10 flex flex-col gap-3">
-        <Button asChild size="lg" className="h-12 px-7 text-base">
-          <Link href={`/order?product=${slug}`}>Place Order</Link>
+        <Button
+          size="lg"
+          className="h-12 px-7 text-base"
+          onClick={() =>
+            toast("Online ordering will be available in the final version.")
+          }
+        >
+          Place Order
         </Button>
         <Button
           asChild

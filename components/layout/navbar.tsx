@@ -37,6 +37,12 @@ export function Navbar() {
       <nav className="container flex items-center justify-between h-16">
         <Link
           href="/"
+          onClick={(event) => {
+            if (pathname === "/") {
+              event.preventDefault()
+              window.scrollTo({ top: 0, behavior: "smooth" })
+            }
+          }}
           className="font-serif text-xl font-medium tracking-tight"
         >
           misu&more.

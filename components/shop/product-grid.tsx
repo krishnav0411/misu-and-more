@@ -11,7 +11,11 @@ const gridVariants: Variants = {
   },
 }
 
-export function ProductGrid({ products }: { products: Product[] }) {
+export function ProductGrid({
+  products,
+}: {
+  products: (Product & { slug: string })[]
+}) {
   return (
     <motion.div
       initial="hidden"
@@ -22,9 +26,9 @@ export function ProductGrid({ products }: { products: Product[] }) {
     >
       {products.map((product) => (
         <ProductCard
-          key={product.slug ?? product.name}
+          key={product.slug}
           product={product}
-          href={product.slug ? `/product/${product.slug}` : undefined}
+          href={`/product/${product.slug}`}
           ctaLabel="View Product"
           ctaVariant="default"
         />

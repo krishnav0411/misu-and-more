@@ -1,10 +1,7 @@
+import Link from "next/link"
 import { Camera } from "lucide-react"
 
-const quickLinks = [
-  { href: "#shop", label: "Shop" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
-]
+import { FooterNav } from "./footer-nav"
 
 export function Footer() {
   return (
@@ -15,12 +12,12 @@ export function Footer() {
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <a
-                href="#home"
+              <Link
+                href="/"
                 className="font-serif text-xl font-medium tracking-tight"
               >
                 misu&more.
-              </a>
+              </Link>
               <p className="mt-2 text-sm text-background/70">
                 Premium handcrafted desserts made to order.
               </p>
@@ -28,18 +25,7 @@ export function Footer() {
 
             <div>
               <h3 className="font-medium mb-3">Quick Links</h3>
-              <ul className="space-y-2">
-                {quickLinks.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-background/70 hover:text-background transition-colors"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <FooterNav />
             </div>
 
             <div>

@@ -1,9 +1,13 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { motion, type Variants } from "framer-motion"
 import { Check } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
+import { SECTION_IDS } from "@/components/layout/navigation"
+import { useHomeSectionNav } from "@/components/layout/section-scroll"
 
 const trustIndicators = ["Made Fresh", "Premium Ingredients", "Made to Order"]
 
@@ -17,11 +21,10 @@ const fadeUp: Variants = {
 }
 
 export function Hero() {
+  const goToSection = useHomeSectionNav()
+
   return (
-    <section
-      id="home"
-      className="relative flex min-h-screen items-center overflow-hidden pt-28 pb-20 lg:pt-16"
-    >
+    <section className="relative flex min-h-screen items-center overflow-hidden pt-28 pb-20 lg:pt-16">
       <div className="container">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left — editorial copy */}
@@ -65,15 +68,15 @@ export function Hero() {
               className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
               <Button asChild size="lg" className="h-12 px-7 text-base">
-                <a href="#shop">Browse Desserts</a>
+                <Link href="/shop">Browse Desserts</Link>
               </Button>
               <Button
-                asChild
                 variant="outline"
                 size="lg"
                 className="h-12 px-7 text-base"
+                onClick={() => goToSection(SECTION_IDS.featured)}
               >
-                <a href="#shop">View Collection</a>
+                View Collection
               </Button>
             </motion.div>
 

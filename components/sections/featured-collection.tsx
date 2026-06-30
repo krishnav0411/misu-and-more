@@ -2,31 +2,12 @@
 
 import { motion, type Variants } from "framer-motion"
 
-import { ProductCard, type Product } from "@/components/products/product-card"
+import { ProductCard } from "@/components/products/product-card"
+import { SECTION_IDS } from "@/components/layout/navigation"
+import { products } from "@/lib/products"
 
-const products: Product[] = [
-  {
-    name: "Chocolate Cake",
-    description:
-      "Rich, layered chocolate sponge with a velvet ganache finish.",
-    price: "₹899",
-    image: "/images/products/ChocolateCake.jpg",
-  },
-  {
-    name: "Tiramisu Tub",
-    description:
-      "Espresso-soaked layers and mascarpone cream in a scoopable tub.",
-    price: "₹449",
-    image: "/images/products/tiramisu.jpg",
-  },
-  {
-    name: "Cookie Tin",
-    description:
-      "An assortment of fresh-baked cookies, boxed for gifting.",
-    price: "₹599",
-    image: "/images/products/CookieTin.jpg",
-  },
-]
+// Preview the first few catalogue items; the full list lives on /shop.
+const featured = products.slice(0, 3)
 
 const headerVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -46,7 +27,7 @@ const gridVariants: Variants = {
 
 export function FeaturedCollection() {
   return (
-    <section id="shop" className="scroll-mt-16 py-24 sm:py-32">
+    <section id={SECTION_IDS.featured} className="scroll-mt-16 py-24 sm:py-32">
       <div className="container">
         <motion.div
           initial="hidden"
@@ -70,8 +51,13 @@ export function FeaturedCollection() {
           variants={gridVariants}
           className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {products.map((product) => (
-            <ProductCard key={product.name} product={product} />
+          {featured.map((product) => (
+            <ProductCard
+              key={product.slug}
+              product={product}
+              href={`/product/${product.slug}`}
+              ctaLabel="View Product"
+            />
           ))}
         </motion.div>
       </div>

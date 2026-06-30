@@ -3,7 +3,6 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion, type Variants } from "framer-motion"
-import { toast } from "sonner"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -20,8 +19,8 @@ export type Product = {
 
 type ProductCardProps = {
   product: Product
-  /** When set, the CTA becomes a link to this route instead of a toast. */
-  href?: string
+  /** Route the card's CTA links to, e.g. `/product/chocolate-cake`. */
+  href: string
   ctaLabel?: string
   ctaVariant?: "default" | "outline"
 }
@@ -38,7 +37,7 @@ const cardVariants: Variants = {
 export function ProductCard({
   product,
   href,
-  ctaLabel = "View Details",
+  ctaLabel = "View Product",
   ctaVariant = "outline",
 }: ProductCardProps) {
   const { name, description, price, image } = product
@@ -76,23 +75,9 @@ export function ProductCard({
               From{" "}
               <span className="font-medium text-foreground">{price}</span>
             </p>
-            {href ? (
-              <Button asChild variant={ctaVariant} className="w-full">
-                <Link href={href}>{ctaLabel}</Link>
-              </Button>
-            ) : (
-              <Button
-                variant={ctaVariant}
-                className="w-full"
-                onClick={() =>
-                  toast(
-                    "Detailed product pages will be available in the final website."
-                  )
-                }
-              >
-                {ctaLabel}
-              </Button>
-            )}
+            <Button asChild variant={ctaVariant} className="w-full">
+              <Link href={href}>{ctaLabel}</Link>
+            </Button>
           </div>
         </div>
       </Card>

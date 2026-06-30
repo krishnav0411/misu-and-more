@@ -85,7 +85,7 @@ function FeatureCard({ feature }: { feature: Feature }) {
 
 export function WhyChooseUs() {
   return (
-    <section id="about" className="scroll-mt-16 bg-background py-24 sm:py-32">
+    <section id="why-choose-us" className="scroll-mt-16 bg-background py-24 sm:py-32">
       <div className="container">
         <motion.div
           initial="hidden"

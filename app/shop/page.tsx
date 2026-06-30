@@ -26,7 +26,7 @@ async function fileExists(publicPath: string): Promise<boolean> {
   }
 }
 
-async function getProducts(): Promise<Product[]> {
+async function getProducts(): Promise<(Product & { slug: string })[]> {
   return Promise.all(
     shopProducts.map(async (product) => ({
       ...product,
